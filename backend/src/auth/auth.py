@@ -134,6 +134,7 @@ def verify_decode_jwt(token):
             }
         if rsa_key:
             try:
+                # Decode the JWT token
                 payload = jwt.decode(
                     token,
                     rsa_key,
@@ -182,8 +183,11 @@ def requires_auth(permission=''):
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
-            payload = verify_decode_jwt(token)
-            check_permissions(permission, payload)
+            try:
+                payload = verify_decode_jwt(token)
+            except:
+                abort(401)
+                check_permissions(permission, payload)
             return f(payload, *args, **kwargs)
 
         return wrapper
