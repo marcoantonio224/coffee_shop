@@ -15,7 +15,7 @@ CORS(app)
 !! NOTE THIS WILL DROP ALL RECORDS AND START YOUR DB FROM SCRATCH
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 '''
-# db_drop_and_create_all()
+db_drop_and_create_all()
 
 ## ROUTES
 '''
@@ -27,7 +27,12 @@ CORS(app)
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks')
-def get_drinks():
+@requires_auth('get:drinks-detail')
+def get_drinks(payload):
+    print('get drinks')
+    print(payload)
+    drinks = Drink.query.all()
+    print(drinks)
     return 'drinks'
 
 '''
@@ -81,7 +86,7 @@ def update_drink(drink_id):
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks/<int:drink_id>', methods=['DELETE'])
-def update_drink(drink_id):
+def delete_drink(drink_id):
     return 'Delete a drink'
 
 ## Error Handling

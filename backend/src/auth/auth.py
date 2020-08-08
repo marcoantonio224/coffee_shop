@@ -1,5 +1,5 @@
 import json
-from flask import request, _request_ctx_stack
+from flask import request, _request_ctx_stack, abort
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
@@ -93,7 +93,7 @@ def check_permissions(permission, payload):
         raise AuthError({
             'code': 'unauthorized',
             'description': 'Permission not found.'
-        }, 403)
+        }, 401)
     # If conditions failed, then return true
     return True
 
@@ -112,7 +112,7 @@ def check_permissions(permission, payload):
     !!NOTE urlopen has a common certificate error described here: https://stackoverflow.com/questions/50236117/scraping-ssl-certificate-verify-failed-error-for-http-en-wikipedia-org
 '''
 def verify_decode_jwt(token):
-    jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/well-known/jwks.json')
+    jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
     jwks = json.loads(jsonurl.read())
     unverified_header = jwt.get_unverified_header(token)
     rsa_key = {}
@@ -131,41 +131,41 @@ def verify_decode_jwt(token):
                 'n': key['n'],
                 'e': key['e']
             }
-        if rsa_key:
-            try:
-                # Decode the JWT token
-                payload = jwt.decode(
-                    token,
-                    rsa_key,
-                    algorithims=ALGORITHMS,
-                    audience=API_AUDIENCE,
-                    issuer='https://'+AUTH0_DOMAIN+'/'
-                )
-                return payload
-            # Throw error if token expired
-            except jwt.ExpiredSignatureError:
-                raise AuthError({
-                    'code': 'token_expired',
-                    'description': 'Token expired.'
-                }, 401)
-            # Throw error if claims are invalid
-            except jwt.JWTClaimsError:
-                raise AuthError({
-                    'code': 'invalid_claims',
-                    'description': 'Incorrect claims. Please, check the audience and issuer'
-
-                }, 401)
-            # Throw error if invalid header
-            except Exception:
-                raise AuthError({
-                    'code': 'invalid_header',
-                    'description': 'Unable to parse authentication token.'
-                }, 400)
-        # Else raise error if rsa is not present
-        raise AuthError({
-            'code': 'invalid_header',
-            'description': 'Unable to find the appropriate key.'
-        }, 400)
+    if rsa_key:
+        try:
+            # Decode the JWT token
+            payload = jwt.decode(
+                token,
+                rsa_key,
+                algorithms=ALGORITHMS,
+                audience=API_AUDIENCE,
+                issuer='https://' + AUTH0_DOMAIN + '/'
+            )
+            return payload
+        # Throw error if token expired
+        except jwt.ExpiredSignatureError:
+            raise AuthError({
+                'code': 'token_expired',
+                'description': 'Token expired.'
+            }, 401)
+        # Throw error if claims are invalid
+        except jwt.JWTClaimsError:
+            raise AuthError({
+                'code': 'invalid_claims',
+                'description': 'Incorrect claims. Please, check the audience and issuer'
+            }, 401)
+        # Throw error if invalid header
+        except Exception:
+            print('OTHER EXCEPTION')
+            raise AuthError({
+                'code': 'invalid_header',
+                'description': 'Unable to parse authentication token.'
+            }, 400)
+    # Else raise error if rsa is not present
+    raise AuthError({
+        'code': 'invalid_header',
+        'description': 'Unable to find the appropriate key.'
+    }, 400)
 
 '''
 @TODO implement @requires_auth(permission) decorator method
