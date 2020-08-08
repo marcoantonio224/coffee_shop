@@ -18,8 +18,6 @@ class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
-
-
 ## Auth Header
 
 # Definition helper raise Authentication error
@@ -43,9 +41,10 @@ class AuthError(Exception):
 '''
 # Validate token to make sure it's valid
 def get_token_auth_header():
-   auth = request.headers.get('Authorization', None)
-   # Check to see if Authoriztion header is present
-   if not auth:
+    """ Get the Access Token from the Authorization Header """
+    auth = request.headers.get('Authorization', None)
+    # Check to see if Authoriztion header is present
+    if not auth:
        raise AuthError({
            'code': 'authorization_header_missing',
            'description': 'Authorization header is expected.'
