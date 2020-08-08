@@ -5,9 +5,9 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = 'udacity-fsnd.auth0.com'
+AUTH0_DOMAIN = 'coffee-shop-udacity123.us.auth0.com'
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'dev'
+API_AUDIENCE = 'drinks'
 
 ## AuthError Exception
 '''
@@ -31,7 +31,12 @@ class AuthError(Exception):
     return the token part of the header
 '''
 def get_token_auth_header():
-   raise Exception('Not Implemented')
+   auth = request.headers.get('Authorization', None)
+   if not auth:
+       raise AuthError({
+           'code': 'authorization_header_missing',
+           'description': 'Authorization header is expected.'
+       }, 401)
 
 '''
 @TODO implement check_permissions(permission, payload) method
