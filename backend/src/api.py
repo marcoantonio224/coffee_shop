@@ -27,10 +27,8 @@ db_drop_and_create_all()
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks')
-@requires_auth('get:drinks-detail')
-def get_drinks(payload):
+def get_drinks():
     print('get drinks')
-    print(payload)
     drinks = Drink.query.all()
     print(drinks)
     return 'drinks'
@@ -44,6 +42,7 @@ def get_drinks(payload):
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks-detail')
+@requires_auth('get:drinks-detail')
 def get_drinks_detail():
     return 'Drink\'s detail'
 
