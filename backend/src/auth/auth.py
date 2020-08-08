@@ -22,6 +22,17 @@ class AuthError(Exception):
 
 ## Auth Header
 
+# Definition helper raise Authentication error
+# def raiseAuthError(keys, messages):
+#     obj = {}
+#     for idx in len(keys):
+#         key = keys[idx]
+#         message = messages[idx]
+#         obj[key] = key
+
+#     return raise AuthError(obj, 401)
+
+# raiseAuthError(['code', 'description'], ['test','test'])
 '''
 @TODO implement get_token_auth_header() method
     it should attempt to get the header from the request
@@ -30,14 +41,37 @@ class AuthError(Exception):
         it should raise an AuthError if the header is malformed
     return the token part of the header
 '''
+# Validate token to make sure it's valid
 def get_token_auth_header():
    auth = request.headers.get('Authorization', None)
+   # Check to see if Authoriztion header is present
    if not auth:
        raise AuthError({
            'code': 'authorization_header_missing',
            'description': 'Authorization header is expected.'
        }, 401)
+    # Check the Authorization object and token to make sure they are valid
+    parts = auth.split()
+    if parts[0].lower() != 'bearer':
+        raise AuthError({
+            'code': 'invalid_header',
+            'description': 'Authorization header must begin with "Bearer".'
+        }, 401)
+    # Check the length of the Authorization header
+    elif len(parts) == 1:
+        raise AuthError({
+            'code': 'invalid_header',
+            'description': 'Token not found.'
+        }, 401)
 
+    elif len(parts) > 2:
+        raise AuthError({
+            'code': 'invalid_header',
+            'description': 'Authorization header must be bearer token.'
+        }, 401)
+    # If all tests pass, grab the encoded token and return it
+    token = parts[1]
+    return token
 '''
 @TODO implement check_permissions(permission, payload) method
     @INPUTS
