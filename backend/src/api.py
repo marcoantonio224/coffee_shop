@@ -88,6 +88,24 @@ def update_drink(drink_id):
 def delete_drink(drink_id):
     return 'Delete a drink'
 
+@app.route('/logout')
+def logout():
+    # Clear session stored data
+    print('LOGGING OUT')
+    session.clear()
+    # Redirect user to logout endpoint
+    return 'logged out'
+
+
+@app.route('/login')
+def login():
+    # Clear session stored data
+    print('LOGGING INNN')
+    # request.session.clear()
+    # Redirect user to logout endpoint
+    return 'logging IN'
+
+
 ## Error Handling
 '''
 Example error handling for unprocessable entity
