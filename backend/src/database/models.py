@@ -72,7 +72,7 @@ class Drink(db.Model):
         the model must have a unique name
         the model must have a unique id or null id
         EXAMPLE
-            drink = Drink(title=req_title, recipe=req_recipe)
+            drink = Drink(title=req_title, recipe=json.dumps(recipe))
             drink.insert()
     '''
     def insert(self):

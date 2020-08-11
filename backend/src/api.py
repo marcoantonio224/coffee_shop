@@ -15,7 +15,7 @@ CORS(app)
 !! NOTE THIS WILL DROP ALL RECORDS AND START YOUR DB FROM SCRATCH
 !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
 '''
-db_drop_and_create_all()
+# db_drop_and_create_all()
 
 ## ROUTES
 '''
@@ -30,8 +30,12 @@ db_drop_and_create_all()
 def get_drinks():
     print('get drinks')
     drinks = Drink.query.all()
-    print(drinks)
-    return 'drinks'
+    drinks_serialized = [drink.short() for drink in drinks]
+    print(drinks_serialized,'short')
+    return jsonify({
+        'success': True,
+        'drinks': drinks_serialized
+    })
 
 '''
 @TODO implement endpoint
@@ -43,8 +47,15 @@ def get_drinks():
 '''
 @app.route('/drinks-detail')
 @requires_auth('get:drinks-detail')
-def get_drinks_detail():
-    return 'Drink\'s detail'
+def get_drinks_detail(token):
+    print('get drinks detail')
+    drinks = Drink.query.all()
+    drinks_serialized = [drink.long() for drink in drinks]
+    print(drinks_serialized,'short')
+    return jsonify({
+        'success': True,
+        'drinks': drinks_serialized
+    })
 
 '''
 @TODO implement endpoint
@@ -55,9 +66,24 @@ def get_drinks_detail():
     returns status code 200 and json {"success": True, "drinks": drink} where drink an array containing only the newly created drink
         or appropriate status code indicating reason for failure
 '''
-@app.route('/drink', methods=['POST'])
+@app.route('/drinks', methods=['POST'])
 def create_new_drink():
-    return 'Create new drink'
+    body = request.get_json()
+    title = body.get('title', None)
+    recipe = body.get('recipe', None)
+    try:
+        # Convert json object back into regular dictionary in oderer to parse
+        drink = Drink(title=title, recipe=json.dumps(recipe))
+        drink.insert()
+        # drinks_serialized = [drink.short() for drink in drinks]
+        print(drink)
+        return jsonify({
+            'success': True,
+            'drinks': 'drinks_serialized'
+        })
+    except:
+        print('Failed creating drink')
+        abort(422)
 
 '''
 @TODO implement endpoint
@@ -88,22 +114,7 @@ def update_drink(drink_id):
 def delete_drink(drink_id):
     return 'Delete a drink'
 
-@app.route('/logout')
-def logout():
-    # Clear session stored data
-    print('LOGGING OUT')
-    session.clear()
-    # Redirect user to logout endpoint
-    return 'logged out'
 
-
-@app.route('/login')
-def login():
-    # Clear session stored data
-    print('LOGGING INNN')
-    # request.session.clear()
-    # Redirect user to logout endpoint
-    return 'logging IN'
 
 
 ## Error Handling
