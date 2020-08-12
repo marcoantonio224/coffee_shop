@@ -104,7 +104,6 @@ def update_drink(token, drink_id):
     try:
         # Update the drink
         drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
-        print(drink)
         drink.title = title
         drink.recipe = json.dumps(recipe)
         drink.update()
@@ -127,8 +126,23 @@ def update_drink(token, drink_id):
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks/<int:drink_id>', methods=['DELETE'])
-def delete_drink(drink_id):
-    return 'Delete a drink'
+@requires_auth('delete:drinks')
+def delete_drink(token, drink_id):
+    # Check to see if id is present
+    if drink_id is None:
+        abort (404)
+    # Proceed with the deletion
+    try:
+        # Delete the drink
+        drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
+        drink.delete()
+    except:
+        abort(422)
+
+    return jsonify({
+        'success': True,
+        'delete': drink_id
+    })
 
 
 
