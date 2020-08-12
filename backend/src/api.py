@@ -28,10 +28,9 @@ CORS(app)
 '''
 @app.route('/drinks')
 def get_drinks():
-    print('get drinks')
     drinks = Drink.query.all()
     drinks_serialized = [drink.short() for drink in drinks]
-    print(drinks_serialized,'short')
+
     return jsonify({
         'success': True,
         'drinks': drinks_serialized
@@ -48,10 +47,8 @@ def get_drinks():
 @app.route('/drinks-detail')
 @requires_auth('get:drinks-detail')
 def get_drinks_detail(token):
-    print('get drinks detail')
     drinks = Drink.query.all()
     drinks_serialized = [drink.long() for drink in drinks]
-    print(drinks_serialized,'short')
     return jsonify({
         'success': True,
         'drinks': drinks_serialized
@@ -67,7 +64,8 @@ def get_drinks_detail(token):
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks', methods=['POST'])
-def create_new_drink():
+@requires_auth('post:drinks')
+def create_new_drink(token):
     body = request.get_json()
     title = body.get('title', None)
     recipe = body.get('recipe', None)
@@ -75,14 +73,11 @@ def create_new_drink():
         # Convert json object back into regular dictionary in oderer to parse
         drink = Drink(title=title, recipe=json.dumps(recipe))
         drink.insert()
-        # drinks_serialized = [drink.short() for drink in drinks]
-        print(drink)
         return jsonify({
             'success': True,
-            'drinks': 'drinks_serialized'
+            'drinks': [drink.short()]
         })
     except:
-        print('Failed creating drink')
         abort(422)
 
 '''
@@ -97,8 +92,29 @@ def create_new_drink():
         or appropriate status code indicating reason for failure
 '''
 @app.route('/drinks/<int:drink_id>', methods=['PATCH'])
-def update_drink(drink_id):
-    return 'Update a drink'
+@requires_auth('patch:drinks')
+def update_drink(token, drink_id):
+    body = request.get_json()
+    title = body.get('title', None)
+    recipe = body.get('recipe', None)
+    # Check to see if id is present
+    if drink_id is None:
+        abort (404)
+    # Proceed with the update
+    try:
+        # Update the drink
+        drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
+        print(drink)
+        drink.title = title
+        drink.recipe = json.dumps(recipe)
+        drink.update()
+    except:
+        abort(422)
+
+    return jsonify({
+        'success': True,
+        'drinks': [drink.long()]
+    })
 
 '''
 @TODO implement endpoint
