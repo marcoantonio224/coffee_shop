@@ -31,7 +31,7 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": ["Authorization"],
 						"url": {
 							"raw": "{{host}}/drinks",
 							"host": [
@@ -62,7 +62,7 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": ["Authorization"],
 						"url": {
 							"raw": "{{host}}/drinks-detail",
 							"host": [
@@ -93,7 +93,7 @@
 					],
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": ["Authorization"],
 						"url": {
 							"raw": "{{host}}/drinks",
 							"host": [
@@ -124,7 +124,7 @@
 					],
 					"request": {
 						"method": "PATCH",
-						"header": [],
+						"header": ["Authorization"],
 						"url": {
 							"raw": "{{host}}/drinks/1",
 							"host": [
@@ -156,7 +156,7 @@
 					],
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": ["Authorization"],
 						"url": {
 							"raw": "{{host}}/drinks/1",
 							"host": [
@@ -198,7 +198,7 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": ["Authorization"],
 						"url": {
 							"raw": "{{host}}/drinks",
 							"host": [
@@ -229,7 +229,7 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": ["Authorization"],
 						"url": {
 							"raw": "{{host}}/drinks-detail",
 							"host": [
@@ -270,7 +270,7 @@
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": ["Authorization"],
 						"url": {
 							"raw": "{{host}}/drinks",
 							"host": [
@@ -301,7 +301,7 @@
 					],
 					"request": {
 						"method": "PATCH",
-						"header": [],
+						"header": ["Authorization"],
 						"url": {
 							"raw": "{{host}}/drinks/1",
 							"host": [
@@ -333,7 +333,7 @@
 					],
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": ["Authorization"],
 						"url": {
 							"raw": "{{host}}/drinks/1",
 							"host": [
@@ -407,7 +407,7 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": ["Authorization"],
 						"url": {
 							"raw": "{{host}}/drinks",
 							"host": [
@@ -443,7 +443,7 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": ["Authorization"],
 						"url": {
 							"raw": "{{host}}/drinks-detail",
 							"host": [
