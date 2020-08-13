@@ -60,8 +60,9 @@ def get_token_auth_header():
         # If all tests pass, grab the encoded token and return it
         token = parts[1]
         return token
+    # Return the exception's response
     except Exception as e:
-        print(e)
+        return e
 '''
 @TODO implement check_permissions(permission, payload) method
     @INPUTS
@@ -174,11 +175,12 @@ def requires_auth(permission=''):
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
             try:
+                # Make sure token is verified first
                 payload = verify_decode_jwt(token)
+                # Check if token has permission to perform action
+                check_permissions(permission, payload)
             except:
                 abort(401)
-                check_permissions(permission, payload)
             return f(payload, *args, **kwargs)
-
         return wrapper
     return requires_auth_decorator

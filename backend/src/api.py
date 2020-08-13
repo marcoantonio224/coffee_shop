@@ -66,10 +66,10 @@ def get_drinks_detail(token):
 @app.route('/drinks', methods=['POST'])
 @requires_auth('post:drinks')
 def create_new_drink(token):
-    body = request.get_json()
-    title = body.get('title', None)
-    recipe = body.get('recipe', None)
     try:
+        body = request.get_json()
+        title = body.get('title', None)
+        recipe = body.get('recipe', None)
         # Convert json object back into regular dictionary in oderer to parse
         drink = Drink(title=title, recipe=json.dumps(recipe))
         drink.insert()
@@ -94,26 +94,25 @@ def create_new_drink(token):
 @app.route('/drinks/<int:drink_id>', methods=['PATCH'])
 @requires_auth('patch:drinks')
 def update_drink(token, drink_id):
-    body = request.get_json()
-    title = body.get('title', None)
-    recipe = body.get('recipe', None)
     # Check to see if id is present
     if drink_id is None:
         abort (404)
     # Proceed with the update
     try:
         # Update the drink
+        body = request.get_json()
+        title = body.get('title', None)
+        recipe = body.get('recipe', None)
         drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
         drink.title = title
         drink.recipe = json.dumps(recipe)
         drink.update()
+        return jsonify({
+            'success': True,
+            'drinks': [drink.long()]
+        })
     except:
         abort(422)
-
-    return jsonify({
-        'success': True,
-        'drinks': [drink.long()]
-    })
 
 '''
 @TODO implement endpoint
@@ -136,13 +135,13 @@ def delete_drink(token, drink_id):
         # Delete the drink
         drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
         drink.delete()
+        return jsonify({
+            'success': True,
+            'delete': drink_id
+        })
     except:
         abort(422)
 
-    return jsonify({
-        'success': True,
-        'delete': drink_id
-    })
 
 
 
