@@ -41,20 +41,20 @@
 
 
   ### Commands:
-  Make sure to be in the **src** directory for assigning `api.py` to the FLASK_APP
-  variable. Then proceed with the following commands.
-  `export FLASK_APP=api.py`  (Sets the application)
-  `flask run --reload` (Sets the project in development mode with --reload)
+    Make sure to be in the **src** directory for assigning `api.py` to the FLASK_APP
+    variable. Then proceed with the following commands.
+    `export FLASK_APP=api.py`  (Sets the application)
+    `flask run --reload` (Sets the project in development mode with --reload)
 
   ### Authentication
-  Our application consists of an authenticated system with Auth0. There are 3 Roles
-  for a user, only 2 require permission of for certain operations delineated below:
-    1. Public (See all drinks)
-      `No permission needed.`
-    2. Barista (See the drinks details)
-       `permission['get:drinks-detail']`
-    3. Manager (Able to create, edit, remove, and see the details of a drink)
-      `permission['get:drinks-detail', post:drinks, patch:drinks, delete:drinks	]`
+    Our application consists of an authenticated system with Auth0. There are 3 Roles
+    for a user, only 2 require permission of for certain operations delineated below:
+      1. Public (See all drinks)
+        `No permission needed.`
+      2. Barista (See the drinks details)
+        `permission['get:drinks-detail']`
+      3. Manager (Able to create, edit, remove, and see the details of a drink)
+        `permission['get:drinks-detail', post:drinks, patch:drinks, delete:drinks	]`
 
   Only the developer who created the Auth0 application/api can assign roles to
   particular email addresses. The permission allows the user to perform certain tasks,
