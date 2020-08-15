@@ -41,10 +41,10 @@
 
 
   ### Commands:
-    Make sure to be in the **src** directory for assigning `api.py` to the FLASK_APP
-    variable. Then proceed with the following commands.
-    `export FLASK_APP=api.py`  (Sets the application)
-    `flask run --reload` (Sets the project in development mode with --reload)
+  Make sure to be in the **src** directory for assigning `api.py` to the FLASK_APP
+  variable. Then proceed with the following commands.
+  `export FLASK_APP=api.py`  (Sets the application)
+  `flask run --reload` (Sets the project in development mode with --reload)
 
   ### Authentication
   Our application consists of an authenticated system with Auth0. There are 3 Roles
