@@ -1,85 +1,84 @@
-# Coffee Shop Backend
+# Uda-Spice Latte Cafe
 
-## Getting Started
+  ## Description
+    This is the backend server for Uda-Spice Latte Cafe for Udacity's users, baristas, and managers. Here we composed 3 main features for Public Users, Baristas, and Managers.
 
-### Installing Dependencies
+  ## Coding Style
+    The backend was configured using RESTful API patterns with Flask and Auth0 (a third party authentication system)
 
-#### Python 3.7
+  ## Technologies
+   Backend: [Python], [Flask], ['SQLAlchemy'], [PostgreSQL]
 
-Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
+  ## Getting Started
 
-#### Virtual Enviornment
+   ### Create Local Environment
+   - If not done so, please install virtual environment. This keeps your dependencies for each project separate and organized:  `pip install virtualenv`
 
-We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+   - Then create the environment inside the src folder:
+    1. virtualenv cs_env
+    2. cd cs_env
+    3. source bin/activate
+    To **deactivate** environment, type: `deactivate`
 
-#### PIP Dependencies
+    ### Install Prerequisites
+      Please install first all the modules for the project to get it started if you haven't done so already. Make sure you are in the parent directory of requirements.txt.
+      Command: `pip install -r requirements.txt`
 
-Once you have your virtual environment setup and running, install dependencies by naviging to the `/backend` directory and running:
+    ### Server Side Development
+      To run a Flask application, make sure you set up the proper environmental variables within the command line and run the application for the backend.
 
-```bash
-pip install -r requirements.txt
-```
+    ### Database Setup.
+      This application uses MySQL for database management. Keep in mind on line 18 of `api.py` there's code commented out `# db_drop_and_create_all()`. If you were to uncomment this code, it will erase the drinks and restart the database. Its allows the postman to run tests correctly when the database is dropped and created again because the test revolves around the drink with `id` of `1`.
 
-This will install all of the required packages we selected within the `requirements.txt` file.
 
-##### Key Dependencies
+    ### Commands:
+    Make sure to be in the **src** directory for assigning `api.py` to the FLASK_APP variable. Then proceed with the following commands.
+    `export FLASK_APP=api.py`  (Sets the application)
+    `flask run --reload` (Sets the project in development mode with --reload)
 
-- [Flask](http://flask.pocoo.org/)  is a lightweight backend microservices framework. Flask is required to handle requests and responses.
+    ### Authentication
+    Our application consists of an authenticated system with Auth0. There are 3 Roles for a user, only 2 require permission of for certain operations delineated below:
+      1. Public (See all drinks)
+        `No permission needed.`
+      2. Barista (See the drinks details)
+        `permission['get:drinks-detail']`
+      3. Manager (Able to create, edit, remove, and see the details of a drink)
+        `permission['get:drinks-detail', post:drinks, patch:drinks, delete:drinks	]`
 
-- [SQLAlchemy](https://www.sqlalchemy.org/) and [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/) are libraries to handle the lightweight sqlite database. Since we want you to focus on auth, we handle the heavy lift for you in `./src/database/models.py`. We recommend skimming this code first so you know how to interface with the Drink model.
+    Only the developer who created the Auth0 application/api can assign roles to particular email addresses. The permission allows the user to perform certain tasks, otherwise would get a 401 error **Unauthorized**.
+      - `get:drinks-detail`: Able to see the ingredients of the drink
+      - `post:drinks`: Able to create a new drink.
+      - `patch:drinks`: Edit an existing drink.
+      - `delete:drinks`: Delete a drink.
 
-- [jose](https://python-jose.readthedocs.io/en/latest/) JavaScript Object Signing and Encryption for JWTs. Useful for encoding, decoding, and verifying JWTS.
+    These permissions come from a valid/authenticated token from Auth0. If not familiar with Auth0, please click link below to learn about it [https://auth0.com/docs/get-started]
 
-## Running the server
+  ### API Endpoints
+    Here are the endpoints of our API application.
+    **Base URL**: [http://127.0.0.1:5000]
+    **API Keys**: This version of the application **does**  require authentication or API Keys.
 
-From within the `./src` directory first ensure you are working using your created virtual environment.
+    Our RESTful API application are tested using postman.
+    If you do not have postman installed, please take the time to install it [https://www.postman.com/downloads/]
 
-Each time you open a new terminal session, run:
+    Once installed, You can import the data from
+    `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
 
-```bash
-export FLASK_APP=api.py;
-```
+    ***NOTE***: The **API TOKENS** for `MANAGER` and `BARISTA` in `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json` are only valid for testing purposes with `POSTMAN` for 20 days as of starting today (08/14/2020).
 
-To run the server, execute:
+    Hit the Runner feature in postman to run and test all endpoints.
 
-```bash
-flask run --reload
-```
+    You can see the results for the tested endpoints in  `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_test_run.json`
 
-The `--reload` flag will detect file changes and restart the server automatically.
+    ## Deployment
+      `N/A`
 
-## Tasks
+    ## Authors
+    - Marco A. Canchola (Full Stack Developer)
+    - Udacity Instructors
 
-### Setup Auth0
-
-1. Create a new Auth0 Account
-2. Select a unique tenant domain
-3. Create a new, single page web application
-4. Create a new API
-    - in API Settings:
-        - Enable RBAC
-        - Enable Add Permissions in the Access Token
-5. Create new API permissions:
-    - `get:drinks-detail`
-    - `post:drinks`
-    - `patch:drinks`
-    - `delete:drinks`
-6. Create new roles for:
-    - Barista
-        - can `get:drinks-detail`
-    - Manager
-        - can perform all actions
-7. Test your endpoints with [Postman](https://getpostman.com). 
-    - Register 2 users - assign the Barista role to one and Manager role to the other.
-    - Sign into each account and make note of the JWT.
-    - Import the postman collection `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
-    - Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs).
-    - Run the collection and correct any errors.
-    - Export the collection overwriting the one we've included so that we have your proper JWTs during review!
-
-### Implement The Server
-
-There are `@TODO` comments throughout the `./backend/src`. We recommend tackling the files in order and from top to bottom:
-
-1. `./src/auth/auth.py`
-2. `./src/api.py`
+    ## Acknowledgements
+    - Udacity
+    - Auth0 (https://auth0.com/)
+    - Python Docs (https://docs.python.org/3/tutorial/venv.html)
+    - Postman (https://www.guru99.com/postman-tutorial.html)

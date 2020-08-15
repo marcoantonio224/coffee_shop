@@ -1,35 +1,27 @@
-# Coffee Shop Full Stack
+# Uda-Spice Latte Cafe
 
-## Full Stack Nano - IAM Final Project
+## Description
+  Welcome to Uda-Spice Latte Cafe, where all of Udacity's students collaborate while getting a cup of java! In this application, we provide students with the latest brew beverage and provide a learning environment. We have three main features for our users.
 
-Udacity has decided to open a new digitally enabled cafe for students to order drinks, socialize, and study hard. But they need help setting up their menu experience.
-
-You have been called on to demonstrate your newly learned skills to create a full stack drink menu application. The application must:
-
-1) Display graphics representing the ratios of ingredients in each drink.
-2) Allow public users to view drink names and graphics.
-3) Allow the shop baristas to see the recipe information.
-4) Allow the shop managers to create new drinks and edit existing drinks.
-
-## Tasks
-
-There are `@TODO` comments throughout the project. We recommend tackling the sections in order. Start by reading the READMEs in:
-
-1. [`./backend/`](./backend/README.md)
-2. [`./frontend/`](./frontend/README.md)
+  1. **Public Users**
+    - Display graphics representing the ratios of ingredients in each drink.
+  2. **Barista**
+    - Allow the shop baristas to see the recipe information.
+  3. **Manager**
+    - Allow the shop managers to create new drinks and edit existing drinks.
 
 ## About the Stack
-
-We started the full stack application for you. It is desiged with some key functional areas:
+  This application was created based on two different infrastructures, Frontend and Backend.
 
 ### Backend
 
-The `./backend` directory contains a partially completed Flask server with a pre-written SQLAlchemy module to simplify your data needs. You will need to complete the required endpoints, configure, and integrate Auth0 for authentication.
+The `./backend` directory contains the Models, Database, Authentication, and API endpoints that make all of this functionality possible. To get the server up and running, simply click to the `./backend` folder and follow the README.md file to get started.
 
 [View the README.md within ./backend for more details.](./backend/README.md)
 
 ### Frontend
 
-The `./frontend` directory contains a complete Ionic frontend to consume the data from the Flask server. You will only need to update the environment variables found within (./frontend/src/environment/environment.ts) to reflect the Auth0 configuration details set up for the backend app. 
+The `./frontend` directory contains a complete Ionic frontend to consume the data from the Flask server. It's job is to provide user interface and interaction between the client and server. To get the frontend up and running, simply go to `./frontend` folder and follow the README.md file to get started.
 
 [View the README.md within ./frontend for more details.](./frontend/README.md)
+

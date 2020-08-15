@@ -142,10 +142,6 @@ def delete_drink(token, drink_id):
     except:
         abort(422)
 
-
-
-
-
 ## Error Handling
 '''
 Example error handling for unprocessable entity
