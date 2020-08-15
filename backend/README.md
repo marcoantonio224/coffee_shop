@@ -63,13 +63,13 @@
   particular email addresses. The permission allows the user to perform certain tasks,
   otherwise would get a 401 error **Unauthorized**.
 
-    - `get:drinks-detail`: Able to see the ingredients of the drink
+  - `get:drinks-detail`: Able to see the ingredients of the drink
 
-    - `post:drinks`: Able to create a new drink.
+  - `post:drinks`: Able to create a new drink.
 
-    - `patch:drinks`: Edit an existing drink.
+  - `patch:drinks`: Edit an existing drink.
 
-    - `delete:drinks`: Delete a drink.
+  - `delete:drinks`: Delete a drink.
 
 
   These permissions come from a valid/authenticated token from Auth0. If not familiar
