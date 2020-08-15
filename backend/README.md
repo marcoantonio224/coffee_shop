@@ -77,8 +77,11 @@
 
   ### API Endpoints
   Here are the endpoints of our API application.
+
   **Base URL**: [http://127.0.0.1:5000]
+
   **API Keys**: This version of the application **does**  require authentication or API Keys.
+
 
   Our RESTful API application are tested using postman.
   If you do not have postman installed, please take the time to install it
@@ -87,7 +90,8 @@
   Once installed, You can import the data from
   `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
 
-  ***NOTE***: The **API TOKENS** for `MANAGER` and `BARISTA` in
+  ***NOTE***:
+  The **API TOKENS** for `MANAGER` and `BARISTA` for
   `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json` are only
   valid for testing purposes with `POSTMAN` for 20 days as of starting today (08/14/2020).
 
