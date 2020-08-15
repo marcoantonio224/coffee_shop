@@ -95,13 +95,11 @@ export class DrinksService {
       this.http.get(this.url + '/drinks-detail', this.getHeaders())
       .subscribe((res: any) => {
         this.drinksToItems(res.drinks);
-        console.log(res);
       });
     } else {
       this.http.get(this.url + '/drinks', this.getHeaders())
       .subscribe((res: any) => {
         this.drinksToItems(res.drinks);
-        console.log(res);
       });
     }
 
@@ -114,16 +112,15 @@ export class DrinksService {
         if (res.success) {
           this.drinksToItems(res.drinks);
         }
-      });
+      }, err => alert('Unable to update drink. Please make sure it cannot contain any special characters or empty values.'));
     } else { // insert
       this.http.post(this.url + '/drinks', drink, this.getHeaders())
       .subscribe( (res: any) => {
         if (res.success) {
           this.drinksToItems(res.drinks);
         }
-      });
+      }, err => alert('Unable to save drink. Please make sure it cannot contain any special characters or empty values.'));
     }
-
   }
 
   deleteDrink(drink: Drink) {

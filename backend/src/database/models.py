@@ -1,7 +1,9 @@
 import os
+import json
+import re
 from sqlalchemy import Column, String, Integer
 from flask_sqlalchemy import SQLAlchemy
-import json
+from sqlalchemy.orm import validates
 
 database_filename = "database.db"
 project_dir = os.path.dirname(os.path.abspath(__file__))
@@ -41,6 +43,47 @@ class Drink(db.Model):
     # the ingredients blob - this stores a lazy json blob
     # the required datatype is [{'color': string, 'name':string, 'parts':number}]
     recipe =  Column(String(180), nullable=False)
+
+    @validates('title')
+    def validate_title(self, key, value):
+        # Create a regular expression for special characters
+        specialChars = re.compile('[@_!#$%^&*()<>/\|}{~:]')
+
+        # Check to see if values are empty first
+        if value == '':
+            print('EMPTY TITLE')
+            raise AssertionError('Cannot contain empty fields')
+        # Check for special characters
+        elif specialChars.search(value) is not None:
+            print('SPECIAL CHAR TITLE')
+            raise AssertionError('Cannot contain special characters')
+
+        # If no errors arise, then proceed.
+        return value
+
+
+    @validates('recipe')
+    def validate_recipe(self, recipe, value):
+        # Create a regular expression for special characters
+        specialChars = re.compile('[@_!#$%^&*()<>/\|}{~:]')
+
+        # Parse the json object to check the values of the recipes
+        if recipe == 'recipe':
+            # Parse the json object
+            for obj in json.loads(value):
+                # Iterate the object's keys
+                for key in obj:
+                    # Check to see if key is empty
+                    if obj[key] == '':
+                        print('EMPTY RECIPE')
+                        raise AssertionError('Cannot contain empty fields')
+                    # Check to see if the value of key has special chars
+                    elif specialChars.search(obj[key]) is not None:
+                        print("SPECIAL CHAR RECEPIE")
+                        raise AssertionError('Cannot contain special characters')
+
+                    # Return the value
+                    return value
 
     '''
     short()
