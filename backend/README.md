@@ -1,7 +1,9 @@
 # Uda-Spice Latte Cafe
 
   ## Description
-    This is the backend server for Uda-Spice Latte Cafe for Udacity's users, baristas, and managers. Here we composed 3 main features for Public Users, Baristas, and Managers.
+    This is the backend server for Uda-Spice Latte Cafe for Udacity's users,
+    baristas, and managers. Here we composed 3 main features for Public Users,
+    Baristas, and Managers.
 
   ## Coding Style
     The backend was configured using RESTful API patterns with Flask and Auth0 (a third party authentication system)
