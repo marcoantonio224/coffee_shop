@@ -1,15 +1,15 @@
 # Uda-Spice Latte Cafe
 
   ## Description
-    This is the backend server for Uda-Spice Latte Cafe for Udacity's users,
-    baristas, and managers. Here we composed 3 main features for Public Users,
-    Baristas, and Managers.
+  This is the backend server for Uda-Spice Latte Cafe for Udacity's users,
+  baristas, and managers. Here we composed 3 main features for Public Users,
+  Baristas, and Managers.
 
   ## Coding Style
-    The backend was configured using RESTful API patterns with Flask and Auth0 (a third party authentication system)
+  The backend was configured using RESTful API patterns with Flask and Auth0 (a third party authentication system)
 
   ## Technologies
-   Backend: [Python], [Flask], ['SQLAlchemy'], [PostgreSQL]
+  Backend: [Python], [Flask], ['SQLAlchemy'], [PostgreSQL]
 
   ## Getting Started
 
@@ -23,21 +23,21 @@
   To **deactivate** environment, type: `deactivate`
 
   ### Install Prerequisites
-    Please install first all the modules for the project to get it started if you
-    haven't done so already. Make sure you are in the parent directory of requirements
-    txt.
-    Command: `pip install -r requirements.txt`
+  Please install first all the modules for the project to get it started if you
+  haven't done so already. Make sure you are in the parent directory of requirements
+  txt.
+  Command: `pip install -r requirements.txt`
 
   ### Server Side Development
-    To run a Flask application, make sure you set up the proper environmental variables
-    within the command line and run the application for the backend.
+  To run a Flask application, make sure you set up the proper environmental variables
+  within the command line and run the application for the backend.
 
   ### Database Setup.
-    This application uses MySQL for database management. Keep in mind on line 18 of
-    `api.py` there's code commented out `# db_drop_and_create_all()`. If you were to
-    uncomment this code, it will erase the drinks and restart the database. Its allows
-    the postman to run tests correctly when the database is dropped and created again
-    because the test revolves around the drink with `id` of `1`.
+  This application uses MySQL for database management. Keep in mind on line 18 of
+  `api.py` there's code commented out `# db_drop_and_create_all()`. If you were to
+  uncomment this code, it will erase the drinks and restart the database. Its allows
+  the postman to run tests correctly when the database is dropped and created again
+  because the test revolves around the drink with `id` of `1`.
 
 
   ### Commands:
