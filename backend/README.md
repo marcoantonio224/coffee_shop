@@ -49,6 +49,7 @@
   ### Authentication
   Our application consists of an authenticated system with Auth0. There are 3 Roles
   for a user, only 2 require permission of for certain operations delineated below:
+
   1. **Public** (See all drinks)
     `No permission needed.`
 
@@ -61,10 +62,15 @@
   Only the developer who created the Auth0 application/api can assign roles to
   particular email addresses. The permission allows the user to perform certain tasks,
   otherwise would get a 401 error **Unauthorized**.
+
     - `get:drinks-detail`: Able to see the ingredients of the drink
+
     - `post:drinks`: Able to create a new drink.
+
     - `patch:drinks`: Edit an existing drink.
+
     - `delete:drinks`: Delete a drink.
+
 
   These permissions come from a valid/authenticated token from Auth0. If not familiar
   with Auth0, please click link below to learn about it [https://auth0.com/docs/get-started]
