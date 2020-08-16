@@ -51,11 +51,9 @@ class Drink(db.Model):
 
         # Check to see if values are empty first
         if value == '':
-            print('EMPTY TITLE')
             raise AssertionError('Cannot contain empty fields')
         # Check for special characters
         elif specialChars.search(value) is not None:
-            print('SPECIAL CHAR TITLE')
             raise AssertionError('Cannot contain special characters')
 
         # If no errors arise, then proceed.
@@ -67,7 +65,6 @@ class Drink(db.Model):
         # Create a regular expression for special characters
         specialChars = re.compile('[@_!#$%^&*()<>/\|}{~:]')
         recipes = []
-
         # Convert the json data into dictionaries
         for obj in json.loads(value):
             recipes.append(obj)
