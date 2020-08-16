@@ -66,24 +66,25 @@ class Drink(db.Model):
     def validate_recipe(self, recipe, value):
         # Create a regular expression for special characters
         specialChars = re.compile('[@_!#$%^&*()<>/\|}{~:]')
+        recipes = []
+
+        # Convert the json data into dictionaries
+        for obj in json.loads(value):
+            recipes.append(obj)
 
         # Parse the json object to check the values of the recipes
-        if recipe == 'recipe':
-            # Parse the json object
-            for obj in json.loads(value):
-                # Iterate the object's keys
-                for key in obj:
-                    # Check to see if key is empty
-                    if obj[key] == '':
-                        print('EMPTY RECIPE')
-                        raise AssertionError('Cannot contain empty fields')
-                    # Check to see if the value of key has special chars
-                    elif specialChars.search(obj[key]) is not None:
-                        print("SPECIAL CHAR RECEPIE")
-                        raise AssertionError('Cannot contain special characters')
+        for obj in recipes:
+            for key in obj:
+                # Check to see if value is empty
+                if obj[key] == "" or obj[key] is None:
+                    raise AssertionError('Cannot contain empty fields')
+                # Check to see if the values has special chars
+                # Convert 'parts' value into a string to test regular expression
+                if specialChars.search(str(obj[key])):
+                    raise AssertionError('Cannot contain special characters')
 
-                    # Return the value
-                    return value
+        # Return the value
+        return value
 
     '''
     short()
