@@ -48,14 +48,12 @@ class Drink(db.Model):
     def validate_title(self, key, value):
         # Create a regular expression for special characters
         specialChars = re.compile('[@_!#$%^&*()<>/\|}{~:]')
-
         # Check to see if values are empty first
         if value == '':
             raise AssertionError('Cannot contain empty fields')
         # Check for special characters
         elif specialChars.search(value) is not None:
             raise AssertionError('Cannot contain special characters')
-
         # If no errors arise, then proceed.
         return value
 
@@ -68,7 +66,6 @@ class Drink(db.Model):
         # Convert the json data into dictionaries
         for obj in json.loads(value):
             recipes.append(obj)
-
         # Parse the json object to check the values of the recipes
         for obj in recipes:
             for key in obj:
@@ -79,7 +76,6 @@ class Drink(db.Model):
                 # Convert 'parts' value into a string to test regular expression
                 if specialChars.search(str(obj[key])):
                     raise AssertionError('Cannot contain special characters')
-
         # Return the value
         return value
 
