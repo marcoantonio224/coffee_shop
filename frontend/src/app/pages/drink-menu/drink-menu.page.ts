@@ -9,14 +9,20 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './drink-menu.page.html',
   styleUrls: ['./drink-menu.page.scss'],
 })
-export class DrinkMenuPage implements OnInit {
+export class DrinkMenuPage implements OnInit
+{
   Object = Object;
+  loginURL: string;
+  logoutURL: string;
 
   constructor(
     private auth: AuthService,
     private modalCtrl: ModalController,
     public drinks: DrinksService
-    ) { }
+    ) {
+        this.loginURL = auth.build_login_link('/tabs/user-page');
+        this.logoutURL = auth.build_logout_link()
+    }
 
   ngOnInit() {
     this.drinks.getDrinks();

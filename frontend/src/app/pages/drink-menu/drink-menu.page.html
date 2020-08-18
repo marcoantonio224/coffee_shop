@@ -1,34 +1,59 @@
-<ion-header>
+<ion-header class='header'>
   <ion-toolbar style="text-align: center">
-    <ion-title><b>Uda-Spice Latte</b> Cafe</ion-title>
+    <div>
+      <ion-title>
+        <b>Uda-Spice Latte</b> Cafe
+        <img class="logo" src="assets/photos/coffee-logo.png" />
+      </ion-title>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="drinks && drinks.items">
-<div style="display: flex; justify-content: center; padding-top: 20px;">
+<div class='main-content' style="display: flex; justify-content: center; padding-top: 20px;">
     <ion-card
-     style="align-items: center; display: flex; flex-direction: column; cursor: pointer;" 
+     style="align-items: center; display: flex; flex-direction: column; cursor: pointer;"
      *ngFor="let drink of Object.keys(drinks.items)"
      (click)="openForm(drinks.items[drink])">
         <ion-card-header>
           <ion-card-title>{{drinks.items[drink].title}}</ion-card-title>
         </ion-card-header>
-      
+
         <ion-card-content>
             <app-drink-graphic [drink]="drinks.items[drink]"></app-drink-graphic>
         </ion-card-content>
       </ion-card>
     <ion-card
-     style="opacity: .7; align-items: center; display: flex; flex-direction: column; cursor: pointer;" 
+     style="opacity: .7; align-items: center; display: flex; flex-direction: column; cursor: pointer;"
      *ngIf="auth.can('post:drinks')"
      (click)="openForm()">
         <ion-card-header>
           <ion-card-title>Create Drink</ion-card-title>
         </ion-card-header>
-      
+
         <ion-card-content style="color:grey; font-size: 256%;">
             <ion-icon name="add-circle"></ion-icon>
         </ion-card-content>
       </ion-card>
 </div>
 </ion-content>
+<div class="sub-content">
+  <div class="text-container">
+    <h3>Welcome!</h3>
+    <p class="main-text">
+        Hello there eager student, welcome to Uda-Spice Latte Cafe. A place where our
+        students can join together and enjoy a cup of coffee. Our cups are highly rated
+        by our Udacity community. Feeling tired ? Have a project deadline to meet ? Well
+        grab a cup of coffee and start coding today!
+    </p>
+    <ion-content *ngIf="!auth.token">
+      <ion-button [href]="loginURL">Log In</ion-button>
+    </ion-content>
+    <ion-content *ngIf="auth.token">
+      <ion-button [href]="logoutURL" (click)="auth.logout()">Log Out</ion-button>
+    </ion-content>
+  </div>
+  <div>
+    <img class="main-image" src="assets/photos/coffees.jpg"  />
+  </div>
+</div>

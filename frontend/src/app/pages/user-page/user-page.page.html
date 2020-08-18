@@ -1,16 +1,40 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>user-page</ion-title>
+    <ion-title>
+      User-page
+      <img class="logo" src="assets/photos/coffee-logo.png" />
+    </ion-title>
+
   </ion-toolbar>
 </ion-header>
+<ion-item>
+  <!-- <ion-textarea [ngModel]="auth.token" name="Active JWT">Active JWT</ion-textarea> -->
+  <div *ngIf="auth.token">
+  <div class="token-container">
+      JWT
+      <p class="token"> {{auth.token}}</p>
+    </div>
+  </div>
+  <ion-content *ngIf="!auth.token">
+    <ion-button [href]="loginURL">Log In</ion-button>
+  </ion-content>
+</ion-item>
 
-<ion-content *ngIf="!auth.token">
-  <ion-button [href]="loginURL">Log In</ion-button>
-</ion-content>
-<ion-content *ngIf="auth.token">
-  <ion-button [href]="logoutURL" (click)="auth.logout()">Log Out</ion-button>
-      <ion-item>
-        <ion-label>Active JWT</ion-label>
-        <ion-textarea [ngModel]="auth.token" name="Active JWT"></ion-textarea>
-      </ion-item>
-</ion-content>
+<div class="sub-user-container">
+    <div *ngIf="auth.token" class="user-container">
+    <div>
+      <h3>
+        Welcome, {{user}} !
+      </h3>
+      <p id="welcome">
+        {{mainText}}
+      </p>
+      <ion-content *ngIf="auth.token">
+          <ion-button [href]="logoutURL" (click)="auth.logout()">Log Out</ion-button>
+      </ion-content>
+    </div>
+    <div>
+      <img class="main-image-2" src="assets/photos/coffee1.jpg" />
+    </div>
+  </div>
+</div>

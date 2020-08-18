@@ -1,0 +1,61 @@
+$bgColor: #d3b385;
+
+ion-item {
+  height: 19em;
+}
+
+.token {
+  width: 28%;
+  height: 4em;
+  overflow-y: scroll;
+}
+
+.token-container {
+  background-color: $bgColor;
+  width: 100%;
+  padding: 1%;
+}
+
+.user-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#welcome {
+  line-height: 2em;
+}
+
+.input-wrapper {
+  display: block;
+}
+
+.native-textarea {
+  overflow: scroll;
+  height: 16em;
+}
+
+.item-native {
+  background-color: $bgColor;
+}
+
+.logo {
+  height: 2em;
+  position: fixed;
+  margin-top: -1%;
+}
+
+.main-image-2 {
+  border: 1px solid #d3b3857a;
+  padding: 1%;
+  margin-top: -5%;
+}
+
+.sub-user-container {
+  padding: 2%;
+  height: 20em;
+}
+
+#user {
+  background-color: white;
+  width: 10%;
+}

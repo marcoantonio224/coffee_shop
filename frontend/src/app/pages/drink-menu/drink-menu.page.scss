@@ -1,5 +1,53 @@
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,900&display=swap');
+
+$bgColor: #d3b385;
+$cardColor:white;
+
+
 ion-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.7em;
 }
+
+ion-card {
+    background-color: $cardColor;
+    height: 10em;
+}
+
+ion-item {
+    background-color: $bgColor;
+}
+
+.logo {
+    height: 2em;
+    position: fixed;
+    margin-top: -1%;
+}
+
+.main-content {
+    background-color:$bgColor;
+    height: 23em;
+}
+
+.main-image {
+    position: relative;
+    width: 100%;
+    border: 1px solid #d3b3857a;
+    padding: 1%;
+    float: right;
+}
+
+.main-text {
+    line-height: 2em;
+}
+
+.text-container {
+    padding: 2%;
+}
+
+.sub-content {
+    display: grid;
+    grid-template-columns: 1fr  1fr;
+    padding:1%;
+}
+
