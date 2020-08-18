@@ -93,7 +93,16 @@
   ***NOTE***:
   The **API TOKENS** for `MANAGER` and `BARISTA` for
   `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json` are only
-  valid for testing purposes with `POSTMAN` for 20 days as of starting today (08/14/2020).
+  valid for testing purposes with `POSTMAN` for 24 hrs as of starting today
+  **08/17/2020) @ 10:00PM** before they expire.
+
+  **Here** are credentials for logins to a fake Manager and Barista account with Auth0:
+  - **Manager**:
+    email: fake-manager@gmail.com
+    password: ***Coffee123***
+  - **Barista**:
+      email: fake-barista@gmail.com
+      password: ***Coffee123***
 
   Hit the Runner feature in postman to run and test all endpoints.
 
